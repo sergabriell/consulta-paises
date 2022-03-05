@@ -2,7 +2,7 @@ const inputPesquisa = document.querySelector('.busca');
 const divPaises = document.querySelector('.paises');
 const root = document.querySelector('body');
 
-let test = '';
+let valor = '';
 let apagar = false;
 
 const paginacao = async () => {
@@ -41,22 +41,22 @@ const paginacao = async () => {
                 const { key } = tecla;
                 apagar = false;
                 if (key !== 'Backspace' && key.length === 1) {
-                    test = inputPesquisa.value + key;
+                    valor = inputPesquisa.value + key;
 
                 } else if (key === 'Backspace') {
-                    test = inputPesquisa.value;
+                    valor = inputPesquisa.value;
                     apagar = true;
                 }
 
                 if (key === 'Enter') {
                     inputPesquisa.value = '';
-                    test = '';
+                    valor = '';
                 }
                 divPais.forEach((event) => {
                     const { textContent } = event;
 
                     if (apagar) {
-                        if (textContent.toUpperCase().includes(test.toUpperCase())) {
+                        if (textContent.toUpperCase().includes(valor.toUpperCase())) {
                             pais.style.display = 'block';
                         } else {
                             pais.style.display = 'none';
@@ -64,7 +64,7 @@ const paginacao = async () => {
                         return;
                     }
 
-                    if (textContent.toUpperCase().includes(key.toUpperCase()) && textContent.toUpperCase().includes(test.toUpperCase())) {
+                    if (textContent.toUpperCase().includes(key.toUpperCase()) && textContent.toUpperCase().includes(valor.toUpperCase())) {
                         pais.style.display = 'block';
                     } else {
                         pais.style.display = 'none';
