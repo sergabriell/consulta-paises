@@ -2,11 +2,9 @@ const inputPesquisa = document.querySelector('.busca');
 const divPaises = document.querySelector('.paises');
 const root = document.querySelector('body');
 
-let valor = '';
-let apagar = false;
 let array = [];
 
-const teste = () => {
+const popularPagina = () => {
     array.forEach((paises) => {
         const { name, region, capital, population, flags: { png } } = paises;
 
@@ -31,22 +29,18 @@ const teste = () => {
         pais.append(nome, regiao, capitalSpan, populacao, bandeira);
         divPaises.append(pais);
 
-        const divPais = pais.querySelectorAll('h2');
+        const nomePais = pais.querySelectorAll('h2');
 
         inputPesquisa.addEventListener('input', (tecla) => {
             const { value } = tecla.target;
 
-            divPais.forEach((event) => {
+            nomePais.forEach((event) => {
                 const { textContent } = event;
 
-                if (textContent.toUpperCase().includes(value.toUpperCase()) && textContent.toUpperCase().includes(valor.toUpperCase())) {
+                if (textContent.toUpperCase().includes(value.toUpperCase())) {
                     pais.style.display = 'block';
                 } else {
                     pais.style.display = 'none';
-                }
-
-                if (inputPesquisa.value === '') {
-                    pais.style.display = 'block';
                 }
             })
         })
@@ -60,7 +54,7 @@ const paginacao = async () => {
         const infos = await paisJson;
 
         array = infos;
-        teste();
+        popularPagina();
 
     } catch (error) {
         console.log(error);
